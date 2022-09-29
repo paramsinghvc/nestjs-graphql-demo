@@ -1,4 +1,4 @@
-schema: ../server/schema.gql
+schema: ../schema.gql
 overwrite: true
 documents: "./pages/**/*.gql"
 generates:

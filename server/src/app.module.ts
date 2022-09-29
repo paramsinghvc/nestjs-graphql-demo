@@ -23,7 +23,7 @@ import { CommentModule } from './comment/comment.module';
     }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
-      autoSchemaFile: join(process.cwd(), 'schema.gql'),
+      autoSchemaFile: join(process.cwd(), '../schema.gql'),
     }),
     PostModule,
     CommentModule,
