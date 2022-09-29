@@ -1,11 +1,12 @@
 import React, { FC, useState } from 'react';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
+import Card from '@mui/material/Card';
 import Box from '@mui/material/Box';
 import { Post, useAddCommentMutation } from '../src/generated/graphql';
 import { Button, TextField } from '@mui/material';
 
-export const Post: FC<{ post: Post; fetchPosts: () => void }> = ({
+export const PostComp: FC<{ post: Post; fetchPosts: () => void }> = ({
   post,
   fetchPosts,
 }) => {
@@ -27,17 +28,20 @@ export const Post: FC<{ post: Post; fetchPosts: () => void }> = ({
   };
 
   return (
-    <Container maxWidth="lg">
+    <Card style={{ marginTop: 30 }}>
       <Box
         sx={{
           my: 4,
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center',
-          alignItems: 'center',
+          padding: 4,
+          paddingTop: 1,
+          paddingBottom: 1,
+          // alignItems: 'center',
         }}
       >
-        <Typography variant="h4" component="p" gutterBottom>
+        <Typography variant="h4" component="p" gutterBottom textAlign="center">
           {post.title}
         </Typography>
         <section>
@@ -52,11 +56,16 @@ export const Post: FC<{ post: Post; fetchPosts: () => void }> = ({
           </form>
         </section>
         {post.comments?.map((comment) => (
-          <Typography component="p" key={comment.id} gutterBottom>
+          <Typography
+            component="p"
+            key={comment.id}
+            gutterBottom
+            style={{ textAlign: 'left' }}
+          >
             {comment.title}
           </Typography>
         ))}
       </Box>
-    </Container>
+    </Card>
   );
 };

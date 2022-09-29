@@ -9,7 +9,7 @@ import {
   useCreatePostMutation,
   useGetPostsLazyQuery,
 } from '../src/generated/graphql';
-import { Post } from '../src/Post';
+import { PostComp } from '../src/Post';
 
 const Home: NextPage = () => {
   const [getPosts, { data: postsData, loading, error }] =
@@ -35,7 +35,7 @@ const Home: NextPage = () => {
   };
 
   return (
-    <Container maxWidth="lg">
+    <Container>
       <Box
         sx={{
           my: 4,
@@ -51,15 +51,22 @@ const Home: NextPage = () => {
         <section>
           <form onSubmit={handlePostSubmit}>
             <TextField
+              size="small"
               value={postTitle}
               onChange={(e) => setPostTitle(e.target.value)}
               placeholder="Enter post title"
             />
-            <Button type="submit">Create Post</Button>
+            <Button
+              type="submit"
+              variant="contained"
+              style={{ marginLeft: 10 }}
+            >
+              Create Post
+            </Button>
           </form>
         </section>
         {postsData?.posts.map((post) => (
-          <Post post={post} key={post.id} fetchPosts={getPosts} />
+          <PostComp post={post} key={post.id} fetchPosts={getPosts} />
         ))}
       </Box>
     </Container>
