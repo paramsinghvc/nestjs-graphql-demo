@@ -1,0 +1,28 @@
+schema: ../server/schema.gql
+overwrite: true
+documents: "./pages/**/*.gql"
+generates:
+  ./src/generated/graphql.tsx:
+    plugins:
+      - typescript
+      - typescript-operations
+      - typescript-react-apollo
+    config:
+      skipTypename: true
+      withHooks: true
+      withHOC: false
+      withComponent: false
+      scalars:
+        DateTime: string
+        Currency: string
+        Void: any
+        URL: string
+  ./src/generated/graphql.schema.json:
+    plugins:
+      - introspection
+  ./src/generated/schema.graphql:
+    plugins:
+      - schema-ast
+  ./src/@types/graphql.d.ts:
+    plugins:
+      - typescript-graphql-files-modules

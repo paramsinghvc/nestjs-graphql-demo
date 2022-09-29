@@ -1,0 +1,28 @@
+query getPosts {
+	posts {
+		id
+		title
+		comments {
+			id
+			title
+		}
+	}
+}
+
+mutation createPost($createPostInput: CreatePostInput!) {
+	createPost(createPostInput: $createPostInput) {
+		id
+		title
+	}
+}
+
+mutation addComment($id: String!, $createCommentInput: CreateCommentInput!) {
+	addComment(id: $id, createCommentInput: $createCommentInput) {
+		id
+		title
+		comments {
+			id
+			title
+		}
+	}
+}

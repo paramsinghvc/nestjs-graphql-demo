@@ -1,0 +1,48 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Comment {
+  id: String!
+  title: String!
+  post: Post!
+}
+
+type Post {
+  id: String!
+  title: String!
+  comments: [Comment!]!
+}
+
+type Query {
+  posts: [Post!]!
+  post(id: String!): Post!
+  comments(postId: String!): [Comment!]!
+  comment(id: String!): Comment!
+}
+
+type Mutation {
+  createPost(createPostInput: CreatePostInput!): Post!
+  updatePost(id: String!, updatePostInput: UpdatePostInput!): Post!
+  removePost(id: String!): Post!
+  addComment(ids: String!, createCommentInput: CreateCommentInput!): Post!
+  createComment(createCommentInput: CreateCommentInput!): Comment!
+  updateComment(id: String!, updateCommentInput: UpdateCommentInput!): Comment!
+  removeComment(id: String!): Comment!
+}
+
+input CreatePostInput {
+  title: String!
+}
+
+input UpdatePostInput {
+  title: String!
+}
+
+input CreateCommentInput {
+  title: String!
+}
+
+input UpdateCommentInput {
+  title: String!
+}
