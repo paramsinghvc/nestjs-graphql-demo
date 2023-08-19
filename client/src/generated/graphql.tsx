@@ -34,7 +34,7 @@ export type Mutation = {
   createComment: Comment;
   createPost: Post;
   removeComment: Comment;
-  removePost: Post;
+  removePost: Scalars['Boolean'];
   updateComment: Comment;
   updatePost: Post;
 };
@@ -132,6 +132,13 @@ export type AddCommentMutationVariables = Exact<{
 
 
 export type AddCommentMutation = { addComment: { id: string, title: string, comments?: Array<{ id: string, title: string }> | null } };
+
+export type RemovePostMutationVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type RemovePostMutation = { removePost: boolean };
 
 
 export const GetPostsDocument = gql`
@@ -246,3 +253,34 @@ export function useAddCommentMutation(baseOptions?: Apollo.MutationHookOptions<A
 export type AddCommentMutationHookResult = ReturnType<typeof useAddCommentMutation>;
 export type AddCommentMutationResult = Apollo.MutationResult<AddCommentMutation>;
 export type AddCommentMutationOptions = Apollo.BaseMutationOptions<AddCommentMutation, AddCommentMutationVariables>;
+export const RemovePostDocument = gql`
+    mutation removePost($id: String!) {
+  removePost(id: $id)
+}
+    `;
+export type RemovePostMutationFn = Apollo.MutationFunction<RemovePostMutation, RemovePostMutationVariables>;
+
+/**
+ * __useRemovePostMutation__
+ *
+ * To run a mutation, you first call `useRemovePostMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useRemovePostMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [removePostMutation, { data, loading, error }] = useRemovePostMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useRemovePostMutation(baseOptions?: Apollo.MutationHookOptions<RemovePostMutation, RemovePostMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<RemovePostMutation, RemovePostMutationVariables>(RemovePostDocument, options);
+      }
+export type RemovePostMutationHookResult = ReturnType<typeof useRemovePostMutation>;
+export type RemovePostMutationResult = Apollo.MutationResult<RemovePostMutation>;
+export type RemovePostMutationOptions = Apollo.BaseMutationOptions<RemovePostMutation, RemovePostMutationVariables>;

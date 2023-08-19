@@ -5,6 +5,7 @@ declare module '*/posts.gql' {
   export const getPosts: DocumentNode;
 export const createPost: DocumentNode;
 export const addComment: DocumentNode;
+export const removePost: DocumentNode;
 
   export default defaultDocument;
 }

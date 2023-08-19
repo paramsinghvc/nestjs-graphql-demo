@@ -17,7 +17,7 @@ type Mutation {
   createComment(createCommentInput: CreateCommentInput!): Comment!
   createPost(createPostInput: CreatePostInput!): Post!
   removeComment(id: String!): Comment!
-  removePost(id: String!): Post!
+  removePost(id: String!): Boolean!
   updateComment(id: String!, updateCommentInput: UpdateCommentInput!): Comment!
   updatePost(id: String!, updatePostInput: UpdatePostInput!): Post!
 }

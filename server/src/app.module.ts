@@ -14,7 +14,7 @@ import { CommentModule } from './comment/comment.module';
       type: 'postgres',
       host: 'localhost',
       port: 5432,
-      username: 'user',
+      username: 'param',
       password: '',
       database: 'demo',
       namingStrategy: new SnakeNamingStrategy(),

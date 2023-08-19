@@ -22,7 +22,7 @@ interface MyAppProps extends AppProps {
 }
 
 const httpLink = createHttpLink({
-  uri: 'http://localhost:3000/graphql',
+  uri: 'http://localhost:3001/graphql',
 });
 
 const apolloClient = new ApolloClient({

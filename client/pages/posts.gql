@@ -26,3 +26,7 @@ mutation addComment($id: String!, $createCommentInput: CreateCommentInput!) {
 		}
 	}
 }
+
+mutation removePost($id: String!) {
+	removePost(id: $id)
+}

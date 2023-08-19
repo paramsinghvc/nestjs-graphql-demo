@@ -3,20 +3,26 @@ import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Card from '@mui/material/Card';
 import Box from '@mui/material/Box';
-import { Post, useAddCommentMutation } from '../src/generated/graphql';
-import { Button, TextField } from '@mui/material';
+import {
+  Post,
+  useAddCommentMutation,
+  useRemovePostMutation,
+} from '../src/generated/graphql';
+import { Button, IconButton, TextField } from '@mui/material';
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 
 export const PostComp: FC<{ post: Post; fetchPosts: () => void }> = ({
   post,
   fetchPosts,
 }) => {
   const [commentTitle, setCommentTitle] = useState('');
-  const [addComment] = useAddCommentMutation();
+  const [addCommentMutation] = useAddCommentMutation();
+  const [removePostMutation] = useRemovePostMutation();
 
   const handlePostSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (commentTitle) {
-      await addComment({
+      await addCommentMutation({
         variables: {
           id: post.id,
           createCommentInput: { title: commentTitle },
@@ -25,6 +31,15 @@ export const PostComp: FC<{ post: Post; fetchPosts: () => void }> = ({
       setCommentTitle('');
       fetchPosts();
     }
+  };
+
+  const handleRemovePost = async (e: React.MouseEvent) => {
+    await removePostMutation({
+      variables: {
+        id: post.id,
+      },
+    });
+    fetchPosts();
   };
 
   return (
@@ -41,18 +56,40 @@ export const PostComp: FC<{ post: Post; fetchPosts: () => void }> = ({
           // alignItems: 'center',
         }}
       >
-        <Typography variant="h4" component="p" gutterBottom textAlign="center">
-          {post.title}
-        </Typography>
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'start',
+          }}
+        >
+          <Typography variant="h4" component="p" gutterBottom textAlign="left">
+            {post.title}
+          </Typography>
+          <IconButton color="error" onClick={handleRemovePost}>
+            <DeleteOutlineIcon />
+          </IconButton>
+        </Box>
         <section>
           <form onSubmit={handlePostSubmit}>
-            <TextField
-              value={commentTitle}
-              onChange={(e) => setCommentTitle(e.target.value)}
-              variant="standard"
-              placeholder="Enter comment"
-            />
-            <Button type="submit">Add Comment</Button>
+            <Box
+              sx={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'start',
+              }}
+            >
+              <TextField
+                value={commentTitle}
+                onChange={(e) => setCommentTitle(e.target.value)}
+                variant="standard"
+                placeholder="Enter comment"
+                fullWidth
+              />
+              <Button type="submit" style={{ width: 200 }}>
+                Add Comment
+              </Button>
+            </Box>
           </form>
         </section>
         {post.comments?.map((comment) => (

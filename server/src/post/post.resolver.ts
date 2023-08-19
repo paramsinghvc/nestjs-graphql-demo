@@ -39,9 +39,10 @@ export class PostResolver {
     return this.postService.update(postId, updatePostInput);
   }
 
-  @Mutation(() => Post)
-  removePost(@Args('id', { type: () => String }) id: string) {
-    return this.postService.remove(id);
+  @Mutation(() => Boolean)
+  async removePost(@Args('id', { type: () => String }) id: string) {
+    const result = await this.postService.remove(id);
+    return !!result;
   }
 
   @Mutation(() => Post)
