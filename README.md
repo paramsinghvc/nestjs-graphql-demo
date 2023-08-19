@@ -11,7 +11,7 @@ git clone git@github.com:paramsinghvc/nestjs-graphql-demo.git
 cd nestjs-graphql-demo
 ```
 
-##Server
+## Server
 
 ```sh
 cd server
@@ -39,7 +39,11 @@ Navigate to `http://localhost:3001/graphql` in the browser to see the graphql sc
 
 <img width="1223" alt="Screenshot 2023-08-19 at 10 00 35" src="https://github.com/paramsinghvc/nestjs-graphql-demo/assets/4329912/0052725b-0a86-41f4-8ff1-022d791b09b2">
 
-##Client
+
+<br />
+<br />
+<br />
+## Client
 ```sh
 cd ../client
 ```
